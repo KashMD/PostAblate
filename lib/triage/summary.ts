@@ -37,7 +37,7 @@ export function buildTriageSummary(answer: TriageAnswer, category: TriageCategor
     `Fever or chills: ${value(answer, "fever")}`,
     `Access-site findings: ${value(answer, "accessSiteFindings")}`,
     `Bleeding: ${value(answer, "bleeding")}`,
-    `Lump/swelling/bruising: ${value(answer, "accessSiteTrend")}`,
+    `Lump/swelling/bruising: ${value(answer, "accessSiteTrend")} / ${value(answer, "accessSiteSymptomTrend")}`,
     `Limb color/temperature/sensation/strength: ${value(answer, "limbSymptoms")}`,
     `Dizziness, near-syncope, or syncope: ${value(answer, "fainting")}`,
     `Urinary symptoms or blood in urine: ${value(answer, "urinary")}`,

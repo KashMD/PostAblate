@@ -40,7 +40,7 @@ export default function OneWeekPage() {
             <SelectField label="Any bleeding from access site?" name="bleeding" value={values.bleeding} options={["No", "Small spot on bandage", "Yes, stopped quickly", "Yes, ongoing", "Yes, soaking through bandage", "Yes, did not stop after 10-15 minutes of firm pressure"]} onChange={setValue} />
             <SelectField label="Any groin/access-site swelling or lump?" name="accessSiteTrend" value={values.accessSiteTrend} options={["No", "Small and stable", "Worsening", "Rapidly expanding", "Fast-growing and painful"]} onChange={setValue} />
             <SelectField label="Access-site symptoms" name="accessSiteFindings" value={String(values.accessSiteFindings ?? "")} options={["Pain", "Bruising", "Swelling", "Lump", "Bleeding", "Drainage", "Redness or warmth", "Red streaks", "None"]} onChange={setValue} />
-            <SelectField label="Are access-site symptoms improving, stable, or worsening?" name="accessSiteTrend" value={values.accessSiteTrend} options={["Improving", "Stable", "Worsening", "Not sure"]} onChange={setValue} />
+            <SelectField label="Are access-site symptoms improving, stable, or worsening?" name="accessSiteSymptomTrend" value={String(values.accessSiteSymptomTrend ?? "")} options={["Improving", "Stable", "Worsening", "Not sure"]} onChange={setValue} />
             <SelectField label="Any limb symptoms on the access side?" name="limbSymptoms" value={String(values.limbSymptoms ?? "")} options={["No", "Cold limb", "Pale or blue color", "Numbness", "Tingling", "Weakness", "Severe pain", "Not sure"]} onChange={setValue} />
           </FormSection>
           <FormSection title="Symptoms and medicines">

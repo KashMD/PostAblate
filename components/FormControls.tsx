@@ -1,5 +1,7 @@
 "use client";
 
+import { useId } from "react";
+
 type FieldProps = {
   label: string;
   name: string;
@@ -10,10 +12,14 @@ type FieldProps = {
 };
 
 export function TextField({ label, name, value = "", type = "text", onChange }: FieldProps) {
+  const id = useId();
+
   return (
-    <label className="grid gap-2 text-sm font-medium text-navy">
+    <label htmlFor={id} className="grid gap-2 text-sm font-medium text-navy">
       {label}
       <input
+        id={id}
+        name={name}
         className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-teal focus:ring-2 focus:ring-teal/20"
         type={type}
         value={value}
@@ -24,10 +30,14 @@ export function TextField({ label, name, value = "", type = "text", onChange }: 
 }
 
 export function TextArea({ label, name, value = "", onChange }: FieldProps) {
+  const id = useId();
+
   return (
-    <label className="grid gap-2 text-sm font-medium text-navy">
+    <label htmlFor={id} className="grid gap-2 text-sm font-medium text-navy">
       {label}
       <textarea
+        id={id}
+        name={name}
         className="min-h-24 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-teal focus:ring-2 focus:ring-teal/20"
         value={value}
         onChange={(event) => onChange(name, event.target.value)}
@@ -37,10 +47,14 @@ export function TextArea({ label, name, value = "", onChange }: FieldProps) {
 }
 
 export function SelectField({ label, name, value = "", options = [], onChange }: FieldProps) {
+  const id = useId();
+
   return (
-    <label className="grid gap-2 text-sm font-medium text-navy">
+    <label htmlFor={id} className="grid gap-2 text-sm font-medium text-navy">
       {label}
       <select
+        id={id}
+        name={name}
         className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-teal focus:ring-2 focus:ring-teal/20"
         value={value}
         onChange={(event) => onChange(name, event.target.value)}
