@@ -45,6 +45,7 @@ export type TriageAnswer = {
   bleeding?: string;
   accessSiteFindings?: string[];
   accessSiteTrend?: string;
+  accessSiteSymptomTrend?: string;
   limbSymptoms?: string[];
   fever?: string;
   palpitations?: string;

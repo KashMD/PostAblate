@@ -47,15 +47,15 @@ function collectUrgent(answer: TriageAnswer) {
   const criteria: string[] = [];
 
   if (answer.symptomCategory === "fever-chills" || includesAny(answer.fever, ["chills", "100.4", "38", "101.5", "fever"])) criteria.push("Fever or chills");
-  if (includesAny(answer.accessSiteFindings, ["worsening", "redness", "warmth", "drainage", "pus", "red streaks", "swelling", "bleeding"]) || includesAny(answer.accessSiteTrend, ["worsening", "enlarging"])) criteria.push("Worsening access-site symptoms");
+  if (includesAny(answer.accessSiteFindings, ["worsening", "redness", "warmth", "drainage", "pus", "red streaks", "swelling", "bleeding"]) || includesAny(answer.accessSiteTrend, ["worsening", "enlarging"]) || includesAny(answer.accessSiteSymptomTrend, ["worsening"])) criteria.push("Worsening access-site symptoms");
   if (includesAny(answer.bleeding, ["ongoing", "stopped quickly"]) && !includesAny(answer.bleeding, ["heavy", "soaking", "did not stop"])) criteria.push("Ongoing or recurrent bleeding that is not heavy");
   if (includesAny(answer.missedBloodThinner, ["missed", "stopped", "no", "not sure"]) || includesAny(answer.medicationChanges, ["stopped", "changed", "uncertain"])) criteria.push("Medication interruption or uncertainty about anticoagulation/heart medicines");
+  if (answer.symptomCategory === "blood-thinner-question" && (includesAny(answer.bleeding, ["bleeding", "ongoing", "stopped quickly"]) || includesAny(answer.accessSiteFindings, ["bruising", "swelling", "lump"]))) criteria.push("Blood thinner question with bleeding, bruising, swelling, or lump concern");
   if (includesAny(answer.palpitations, ["longer than 24", "severe", "frequent", "worsening", "sustained", "associated"]) || answer.dizzinessWithRhythm) criteria.push("Prolonged, worsening, or symptomatic rhythm symptoms");
   if (includesAny(answer.shortnessOfBreath, ["new", "worsening", "moderate"]) || includesAny(answer.chestPain, ["persistent", "worsening", "moderate"])) criteria.push("New or worsening chest/breathing symptoms");
   if (answer.symptomCategory === "new-back-pain" || equalsAny(answer.newBackPain, ["yes"])) criteria.push("New back pain after AF/left atrial ablation");
   if (answer.symptomCategory === "swallowing" || includesAny(answer.swallowing, ["painful", "trouble", "severe"])) criteria.push("Trouble swallowing or painful swallowing after AF ablation");
   if (answer.symptomCategory === "severe-reflux" || includesAny(answer.reflux, ["worsening", "severe"])) criteria.push("Severe reflux-like chest discomfort after AF ablation");
-  if (answer.symptomCategory === "blood-thinner-question" || answer.symptomCategory === "medication-question") criteria.push("Medication or blood thinner question");
   if (includesAny(answer.urinary, ["trouble", "painful", "blood"])) criteria.push("Trouble urinating or blood in urine");
   if (includesAny(answer.fluidRetention, ["weight", "swelling", "lying flat"])) criteria.push("Fluid retention symptoms");
   if (includesAny(answer.overallConcern, ["severe", "prolonged", "unusual", "worsening", "concerning"])) criteria.push("Symptom feels severe, prolonged, unusual, worsening, or concerning");
@@ -68,9 +68,8 @@ function collectRoutine(answer: TriageAnswer) {
 
   if (answer.symptomCategory === "activity-question") criteria.push("Activity, work, exercise, sex, driving, or travel question");
   if (answer.symptomCategory === "medication-question" || answer.symptomCategory === "blood-thinner-question") criteria.push("Medication question without reported red flags");
-  if (includesAny(answer.palpitations, ["mild", "brief", "intermittent"])) criteria.push("Mild rhythm symptoms without severe features");
-  if (includesAny(answer.accessSiteFindings, ["pain", "bruising", "lump", "soreness"]) || answer.symptomCategory === "bruising") criteria.push("Mild access-site soreness, bruising, or lump");
-  if (answer.symptomCategory === "fatigue") criteria.push("Fatigue or uncertainty about recovery");
+  if (includesAny(answer.palpitations, ["mild"])) criteria.push("Mild rhythm symptoms without severe features");
+  if (includesAny(answer.accessSiteFindings, ["pain", "soreness"]) || answer.symptomCategory === "bruising") criteria.push("Mild access-site soreness, bruising, or lump");
   if (answer.symptomCategory === "other") criteria.push("Uncertain symptom without emergency details");
 
   return criteria;
@@ -80,6 +79,7 @@ function collectEducation(answer: TriageAnswer) {
   const criteria: string[] = [];
 
   if (answer.symptomCategory === "sore-throat") criteria.push("Mild sore throat after anesthesia or TEE");
+  if (answer.symptomCategory === "fatigue" && (equalsAny(answer.severity, ["mild"]) || !answer.severity)) criteria.push("Mild fatigue that is not worsening");
   if (answer.symptomCategory === "mild-chest-discomfort" || includesAny(answer.chestPain, ["mild"])) criteria.push("Mild chest soreness or discomfort");
   if (includesAny(answer.shortnessOfBreath, ["mild"])) criteria.push("Mild shortness of breath");
   if (includesAny(answer.bleeding, ["small spot", "quarter"])) criteria.push("Small amount of blood on bandage");
