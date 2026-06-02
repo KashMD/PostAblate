@@ -45,6 +45,7 @@ describe("evaluateTriage", () => {
     ["access-site warmth", { accessSiteFindings: ["Warmth"] }],
     ["access-site drainage", { accessSiteFindings: ["Drainage"] }],
     ["access-site swelling", { accessSiteFindings: ["Swelling"] }],
+    ["severe access-site pain", { accessSiteFindings: ["Severe pain"] }],
     ["access-site bruising with blood thinner concern", { symptomCategory: "blood-thinner-question", accessSiteFindings: ["Bruising"] }],
     ["growing access-site lump", { accessSiteTrend: "Enlarging" }],
     ["palpitations lasting longer than 24 hours", { symptomCategory: "palpitations", palpitations: "Lasting longer than 24 hours" }],
@@ -157,10 +158,20 @@ describe("evaluateTriage", () => {
     expectCategory(
       {
         accessSite: "Right neck",
-        palpitations: "Lasting longer than 24 hours",
+        accessSiteFindings: ["Bleeding", "Redness or warmth"],
         accessSiteSymptomTrend: "Worsening"
       },
       "urgent"
+    );
+  });
+
+  it("escalates 1-Week Recovery Check emergency access-site findings through the shared triage engine", () => {
+    expectCategory(
+      {
+        accessSite: "Left groin, Right groin",
+        accessSiteFindings: ["Rapidly expanding swelling", "Fast-growing painful lump"]
+      },
+      "emergency"
     );
   });
 

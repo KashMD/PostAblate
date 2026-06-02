@@ -47,7 +47,7 @@ function collectUrgent(answer: TriageAnswer) {
   const criteria: string[] = [];
 
   if (answer.symptomCategory === "fever-chills" || includesAny(answer.fever, ["chills", "100.4", "38", "101.5", "fever"])) criteria.push("Fever or chills");
-  if (includesAny(answer.accessSiteFindings, ["worsening", "redness", "warmth", "drainage", "pus", "red streaks", "swelling", "bleeding"]) || includesAny(answer.accessSiteTrend, ["worsening", "enlarging"]) || includesAny(answer.accessSiteSymptomTrend, ["worsening"])) criteria.push("Worsening access-site symptoms");
+  if (includesAny(answer.accessSiteFindings, ["worsening", "redness", "warmth", "drainage", "pus", "red streaks", "swelling", "bleeding", "severe pain"]) || includesAny(answer.accessSiteTrend, ["worsening", "enlarging"]) || includesAny(answer.accessSiteSymptomTrend, ["worsening"])) criteria.push("Worsening access-site symptoms");
   if (includesAny(answer.bleeding, ["ongoing", "stopped quickly"]) && !includesAny(answer.bleeding, ["heavy", "soaking", "did not stop"])) criteria.push("Ongoing or recurrent bleeding that is not heavy");
   if (includesAny(answer.missedBloodThinner, ["missed", "stopped", "no", "not sure"]) || includesAny(answer.medicationChanges, ["stopped", "changed", "uncertain"])) criteria.push("Medication interruption or uncertainty about anticoagulation/heart medicines");
   if (answer.symptomCategory === "blood-thinner-question" && (includesAny(answer.bleeding, ["bleeding", "ongoing", "stopped quickly"]) || includesAny(answer.accessSiteFindings, ["bruising", "swelling", "lump"]))) criteria.push("Blood thinner question with bleeding, bruising, swelling, or lump concern");

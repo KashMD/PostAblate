@@ -10,10 +10,82 @@ import { evaluateTriage } from "@/lib/triage/rules";
 import { buildFollowUpSummary } from "@/lib/triage/summary";
 import type { TriageAnswer, TriageResult } from "@/lib/triage/types";
 
+const accessSiteSymptomOptions = [
+  "None",
+  "Pain",
+  "Bruising",
+  "Swelling",
+  "Lump",
+  "Bleeding",
+  "Drainage",
+  "Redness or warmth",
+  "Red streaks",
+  "Severe pain",
+  "Rapidly expanding swelling",
+  "Fast-growing painful lump",
+  "Other / not sure"
+];
+
+function parseSelections(value: unknown) {
+  if (Array.isArray(value)) return value.map(String);
+  return String(value ?? "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function AccessSiteSymptomsField({
+  value,
+  onChange
+}: {
+  value: unknown;
+  onChange: (name: string, value: string) => void;
+}) {
+  const selected = parseSelections(value);
+
+  const toggle = (option: string) => {
+    let next: string[];
+
+    if (option === "None") {
+      next = selected.includes("None") ? [] : ["None"];
+    } else {
+      const withoutNone = selected.filter((item) => item !== "None");
+      next = withoutNone.includes(option)
+        ? withoutNone.filter((item) => item !== option)
+        : [...withoutNone, option];
+    }
+
+    if (!next.length || next.includes("None")) onChange("accessSiteSymptomTrend", "");
+    onChange("accessSiteFindings", next.join(", "));
+  };
+
+  return (
+    <fieldset className="grid gap-3 rounded-lg border border-slate-200 bg-white p-4">
+      <legend className="px-1 text-sm font-semibold text-navy">Access-site symptoms</legend>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {accessSiteSymptomOptions.map((option) => (
+          <label key={option} className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-navy">
+            <input
+              name="accessSiteFindings"
+              type="checkbox"
+              checked={selected.includes(option)}
+              onChange={() => toggle(option)}
+              className="h-4 w-4 rounded border-slate-300 text-teal focus:ring-teal"
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
 export default function OneWeekPage() {
   const [values, setValues] = useState<TriageAnswer>({});
   const [submitted, setSubmitted] = useState(false);
   const setValue = (name: string, value: string) => setValues((current) => ({ ...current, [name]: value }));
+  const accessSiteSymptoms = parseSelections(values.accessSiteFindings);
+  const showAccessSiteTrend = accessSiteSymptoms.length > 0 && !accessSiteSymptoms.includes("None");
   const result: TriageResult = useMemo(() => {
     const evaluated = evaluateTriage(values);
     return {
@@ -35,10 +107,10 @@ export default function OneWeekPage() {
             <SelectField label="Is the catheter site healing?" name="siteHealing" value={String(values.siteHealing ?? "")} options={["Yes", "Mostly", "No", "Not sure"]} onChange={setValue} />
           </FormSection>
           <FormSection title="Access-site safety">
-            <SelectField label="Any bleeding from access site?" name="bleeding" value={values.bleeding} options={["No", "Small spot on bandage", "Yes, stopped quickly", "Yes, ongoing", "Yes, soaking through bandage", "Yes, did not stop after 10-15 minutes of firm pressure"]} onChange={setValue} />
-            <SelectField label="Any access-site swelling or lump?" name="accessSiteTrend" value={values.accessSiteTrend} options={["No", "Small and stable", "Worsening", "Rapidly expanding", "Fast-growing and painful"]} onChange={setValue} />
-            <SelectField label="Access-site symptoms" name="accessSiteFindings" value={String(values.accessSiteFindings ?? "")} options={["Pain", "Bruising", "Swelling", "Lump", "Bleeding", "Drainage", "Redness or warmth", "Red streaks", "None"]} onChange={setValue} />
-            <SelectField label="Are access-site symptoms improving, stable, or worsening?" name="accessSiteSymptomTrend" value={String(values.accessSiteSymptomTrend ?? "")} options={["Improving", "Stable", "Worsening", "Not sure"]} onChange={setValue} />
+            <AccessSiteSymptomsField value={values.accessSiteFindings} onChange={setValue} />
+            {showAccessSiteTrend ? (
+              <SelectField label="Are access-site symptoms improving, stable, or worsening?" name="accessSiteSymptomTrend" value={String(values.accessSiteSymptomTrend ?? "")} options={["Improving", "Stable", "Worsening", "Not sure"]} onChange={setValue} />
+            ) : null}
             <SelectField label="Any limb symptoms on the access side?" name="limbSymptoms" value={String(values.limbSymptoms ?? "")} options={["No", "Cold limb", "Pale or blue color", "Numbness", "Tingling", "Weakness", "Severe pain", "Not sure"]} onChange={setValue} />
           </FormSection>
           <FormSection title="Symptoms and medicines">
