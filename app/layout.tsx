@@ -11,7 +11,7 @@ const nav = [
   ["Triage", "/triage"],
   ["Follow-up", "/follow-up"],
   ["Education", "/education"],
-  ["Clinician review", "/admin"],
+  ["Clinician Review Queue", "/admin"],
   ["About", "/about"]
 ];
 
@@ -36,6 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ))}
             </div>
           </nav>
+          <div className="border-t border-slate-200 bg-red-50 px-4 py-2 text-center text-xs font-medium text-red-950">
+            MVP demonstration only. Not monitored in real time. Not for real patient care. If you have emergency symptoms, call 911 or seek emergency care now.
+          </div>
         </header>
         <main>{children}</main>
       </body>

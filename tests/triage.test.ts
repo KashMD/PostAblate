@@ -139,4 +139,39 @@ describe("evaluateTriage", () => {
       "urgent"
     );
   });
+
+  it("escalates Next-Day Safety Check red flags through the shared triage engine", () => {
+    const result = expectCategory(
+      {
+        accessSite: "Groin",
+        bleeding: "Yes, did not stop after 10-15 minutes of firm pressure",
+        overallConcern: "No, I feel unsafe at home"
+      },
+      "emergency"
+    );
+
+    expect(result.label).toBe("Emergency now");
+  });
+
+  it("escalates 1-Week Recovery Check red flags through the shared triage engine", () => {
+    expectCategory(
+      {
+        accessSite: "Neck",
+        palpitations: "Lasting longer than 24 hours",
+        accessSiteSymptomTrend: "Worsening"
+      },
+      "urgent"
+    );
+  });
+
+  it("escalates 30-Day Recovery Follow-Up red flags through the shared triage engine", () => {
+    expectCategory(
+      {
+        accessSite: "More than one site",
+        swallowing: "Trouble swallowing",
+        chestPain: "Mild"
+      },
+      "emergency"
+    );
+  });
 });

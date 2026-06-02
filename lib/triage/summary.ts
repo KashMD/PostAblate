@@ -19,7 +19,7 @@ function value(answer: TriageAnswer, key: keyof TriageAnswer, fallback = "Not re
 
 export function buildTriageSummary(answer: TriageAnswer, category: TriageCategory) {
   return [
-    "PostAblate AF Ablation Recovery Summary",
+    "PostAblate Symptom Triage Summary",
     "",
     `Procedure type: AF ablation`,
     `Ablation date: ${value(answer, "ablationDate")}`,
@@ -54,7 +54,10 @@ export function buildTriageSummary(answer: TriageAnswer, category: TriageCategor
 }
 
 export function buildFollowUpSummary(
-  title: "PostAblate One-Week AF Ablation Summary" | "PostAblate One-Month AF Ablation Summary",
+  title:
+    | "PostAblate Next-Day Safety Check Summary"
+    | "PostAblate 1-Week Recovery Check Summary"
+    | "PostAblate 30-Day Recovery Follow-Up Summary",
   answer: TriageAnswer,
   category: TriageCategory
 ) {

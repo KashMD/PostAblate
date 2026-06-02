@@ -3,23 +3,24 @@ import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import { mockSubmissions } from "@/lib/mock/admin";
 
-const filters = ["Emergency now", "Urgent same-day EP contact", "Routine nurse review", "Expected recovery education", "One-week checks", "One-month follow-ups", "Access-site concerns", "Rhythm symptoms", "Medication concerns"];
+const filters = ["Emergency now", "Same-day EP flags", "Routine nurse review", "Education-only encounters", "Next-day safety checks", "1-week recovery checks", "30-day recovery follow-ups", "Access-site concerns", "Rhythm symptoms", "Medication concerns"];
 
 export default function AdminPage() {
   const metrics = [
     ["Total patients", 42],
     ["New triage submissions", 8],
     ["Emergency flags", mockSubmissions.filter((item) => item.category === "emergency").length],
-    ["Urgent same-day flags", mockSubmissions.filter((item) => item.category === "urgent").length],
-    ["One-week checks completed", 17],
-    ["One-month follow-ups completed", 11],
-    ["Routine nurse review queue", mockSubmissions.filter((item) => item.category === "routine").length],
+    ["Same-day EP flags", mockSubmissions.filter((item) => item.category === "urgent").length],
+    ["Next-day safety checks", mockSubmissions.filter((item) => item.type === "Next-Day Safety Check").length],
+    ["1-week recovery checks", mockSubmissions.filter((item) => item.type === "1-Week Recovery Check").length],
+    ["30-day recovery follow-ups", mockSubmissions.filter((item) => item.type === "30-Day Recovery Follow-Up").length],
+    ["Routine nurse review", mockSubmissions.filter((item) => item.category === "routine").length],
     ["Education-only encounters", mockSubmissions.filter((item) => item.category === "education").length]
   ];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <PageHeader eyebrow="Clinician review placeholder" title="AF ablation recovery review dashboard" description="Mock clinician dashboard structure for future authenticated review. Real auth and persistence are not active in this MVP scaffold." />
+      <PageHeader eyebrow="Clinician Review Queue placeholder" title="AF ablation recovery review dashboard" description="Mock clinician dashboard structure for future authenticated review. Real auth and persistence are not active in this MVP scaffold." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {metrics.map(([label, value]) => <AdminMetricCard key={label} label={String(label)} value={value} />)}
       </div>

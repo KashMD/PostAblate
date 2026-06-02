@@ -46,7 +46,7 @@ export default function TriagePage() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
-      <PageHeader eyebrow="Symptom triage" title="Structured AF ablation symptom triage" description="Answer fixed safety questions. Red flags always override routine recovery education." />
+      <PageHeader eyebrow="Anytime Symptom Triage" title="Structured AF ablation symptom triage" description="Available anytime after AF ablation. Answer fixed safety questions. Red flags always override routine recovery education." />
       <div className="mb-6">
         <SafetyBanner />
       </div>

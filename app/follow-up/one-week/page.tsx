@@ -19,13 +19,13 @@ export default function OneWeekPage() {
     const evaluated = evaluateTriage(values);
     return {
       ...evaluated,
-      clinicianSummary: buildFollowUpSummary("PostAblate One-Week AF Ablation Summary", values, evaluated.category)
+      clinicianSummary: buildFollowUpSummary("PostAblate 1-Week Recovery Check Summary", values, evaluated.category)
     };
   }, [values]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
-      <PageHeader eyebrow="One-week check" title="One-week AF ablation recovery and safety check" description="This form captures early post-AF-ablation safety concerns and common recovery issues." />
+      <PageHeader eyebrow="1-Week Recovery Check" title="1-Week Recovery Check" description="A short check on healing, activity, symptoms, and medication questions about one week after AF ablation." />
       <div className="mb-6"><SafetyBanner /></div>
       <div className="grid gap-5 lg:grid-cols-[1fr_0.9fr]">
         <form className="grid gap-5" onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }}>
@@ -61,9 +61,9 @@ export default function OneWeekPage() {
             <SelectField label="Overall recovery" name="overallConcern" value={values.overallConcern} options={["Better than expected", "As expected", "Worse than expected", "Not sure"]} onChange={setValue} />
             <TextArea label="Optional message to care team" name="questionsForTeam" value={values.questionsForTeam} onChange={setValue} />
           </FormSection>
-          <button className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm" type="submit">Submit one-week check</button>
+          <button className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm" type="submit">Submit 1-Week Recovery Check</button>
         </form>
-        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-soft">Your one-week safety category and clinician summary will appear here after submission.</div>}</aside>
+        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-soft">Your 1-week recovery category and clinician summary will appear here after submission.</div>}</aside>
       </div>
     </div>
   );

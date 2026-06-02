@@ -4,11 +4,18 @@ import { RecoveryCard } from "@/components/RecoveryCard";
 import { SafetyBanner } from "@/components/SafetyBanner";
 
 const cards = [
-  ["Symptom triage", "Answer structured safety questions any time after AF ablation.", "/triage", "urgent"],
-  ["One-week recovery check", "Review early safety concerns, access-site healing, rhythm symptoms, and medications.", "/follow-up/one-week", "default"],
-  ["One-month follow-up", "Capture rhythm symptoms, healthcare use, recovery trajectory, and patient-reported outcomes.", "/follow-up/one-month", "default"],
+  ["I have a symptom now", "Available anytime. Answer structured safety questions after AF ablation.", "/triage", "urgent"],
+  ["Complete Next-Day Safety Check", "Recommended the day after AF ablation.", "/follow-up/next-day", "default"],
+  ["Complete 30-Day Recovery Follow-Up", "Rhythm symptoms, healthcare use, medication adherence, quality of life, and recovery trajectory.", "/follow-up/thirty-day", "default"],
   ["AF ablation recovery education", "Read safety-first guidance about common recovery questions.", "/education", "default"],
-  ["Clinician review", "Preview a structured review queue with mock AF ablation submissions.", "/admin", "default"]
+  ["Clinician Review Queue", "Preview a structured review queue with mock AF ablation submissions.", "/admin", "default"]
+] as const;
+
+const pathway = [
+  ["Day 1", "Next-Day Safety Check"],
+  ["Any time", "Symptom Triage"],
+  ["Day 7", "1-Week Recovery Check"],
+  ["Day 30", "Recovery Follow-Up"]
 ] as const;
 
 export default function Home() {
@@ -22,10 +29,13 @@ export default function Home() {
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700">A structured recovery companion for patients after atrial fibrillation ablation.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/triage" className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-slate-800">
-              Start recovery check
+              I have a symptom now
             </Link>
-            <Link href="/follow-up" className="rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal shadow-sm transition hover:bg-teal hover:text-white">
-              Complete follow-up
+            <Link href="/follow-up/next-day" className="rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal shadow-sm transition hover:bg-teal hover:text-white">
+              Complete Next-Day Safety Check
+            </Link>
+            <Link href="/follow-up/thirty-day" className="rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal shadow-sm transition hover:bg-teal hover:text-white">
+              Complete 30-Day Follow-Up
             </Link>
           </div>
           <div className="mt-8 grid gap-3">
@@ -49,6 +59,17 @@ export default function Home() {
             <div className="rounded-lg bg-white p-4">
               <p className="text-3xl font-semibold text-teal">AF-only</p>
               <p className="mt-1 text-sm text-slate-600">The active MVP scope is AF ablation recovery.</p>
+            </div>
+          </div>
+          <div className="mt-5 rounded-lg bg-white p-4">
+            <p className="text-sm font-semibold uppercase tracking-wide text-teal">Recovery pathway</p>
+            <div className="mt-3 grid gap-2">
+              {pathway.map(([when, label]) => (
+                <div key={label} className="flex items-center justify-between gap-3 rounded-lg bg-clinical px-3 py-2 text-sm">
+                  <span className="font-semibold text-navy">{when}</span>
+                  <span className="text-right text-slate-600">{label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

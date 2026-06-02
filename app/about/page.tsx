@@ -17,7 +17,7 @@ export default function AboutPage() {
         </DisclaimerBox>
         <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-soft">
           <h2 className="text-xl font-semibold text-navy">What this MVP supports</h2>
-          <p className="mt-3 text-sm leading-6 text-slate-600">The active pathway supports structured recovery after AF ablation: intake, symptom triage, one-week check-in, one-month follow-up, education, and clinician review summaries.</p>
+          <p className="mt-3 text-sm leading-6 text-slate-600">The active pathway supports structured recovery after AF ablation: intake, anytime symptom triage, next-day safety check, 1-week recovery check, 30-day recovery follow-up, education, and clinician review summaries.</p>
         </section>
         <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-soft">
           <h2 className="text-xl font-semibold text-navy">What this MVP does not do</h2>
