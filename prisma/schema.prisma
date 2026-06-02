@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PatientSession {
+  id                    String   @id @default(cuid())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  procedureType         String
+  procedureDate         DateTime?
+  accessSite            String?
+  anticoagulantStatus   String?
+  anticoagulantName     String?
+  antiarrhythmicStatus  String?
+  dischargeType         String?
+  knownComplications    Json?
+
+  triageSubmissions     SymptomTriageSubmission[]
+  oneWeekSubmissions    OneWeekFollowUpSubmission[]
+  oneMonthSubmissions   OneMonthFollowUpSubmission[]
+  educationViews        EducationView[]
+}
+
+model SymptomTriageSubmission {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  patientSessionId String?
+  symptomCategory  String
+  answersJson      Json
+  triageCategory   String
+  recommendedAction String
+  clinicianSummary String
+  status           String   @default("New")
+
+  patientSession   PatientSession? @relation(fields: [patientSessionId], references: [id])
+}
+
+model OneWeekFollowUpSubmission {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+  patientSessionId  String?
+  procedureDate     DateTime?
+  accessSite        String?
+  answersJson       Json
+  redFlagPresent    Boolean
+  triageCategory    String
+  recommendedAction String
+  clinicianSummary  String
+  status            String   @default("New")
+
+  patientSession    PatientSession? @relation(fields: [patientSessionId], references: [id])
+}
+
+model OneMonthFollowUpSubmission {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+  patientSessionId  String?
+  procedureDate     DateTime?
+  accessSite        String?
+  answersJson       Json
+  redFlagPresent    Boolean
+  triageCategory    String
+  recommendedAction String
+  clinicianSummary  String
+  status            String   @default("New")
+
+  patientSession    PatientSession? @relation(fields: [patientSessionId], references: [id])
+}
+
+model EducationView {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  topic            String
+  patientSessionId String?
+
+  patientSession   PatientSession? @relation(fields: [patientSessionId], references: [id])
+}
+
+model AuditEvent {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  eventType    String
+  metadataJson Json
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  rating    Int?
+  comment   String?
+}
