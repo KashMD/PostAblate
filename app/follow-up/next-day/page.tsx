@@ -2,11 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { FormSection } from "@/components/FormSection";
-import { SelectField, TextArea, TextField } from "@/components/FormControls";
+import { AccessSiteField, SelectField, TextArea, TextField } from "@/components/FormControls";
 import { PageHeader } from "@/components/PageHeader";
 import { SafetyBanner } from "@/components/SafetyBanner";
 import { TriageResultCard } from "@/components/TriageResultCard";
-import { accessSiteOptions } from "@/lib/access-sites";
 import { evaluateTriage } from "@/lib/triage/rules";
 import { buildFollowUpSummary } from "@/lib/triage/summary";
 import type { TriageAnswer, TriageResult } from "@/lib/triage/types";
@@ -35,11 +34,11 @@ export default function NextDayPage() {
         <form className="grid gap-5" onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }}>
           <FormSection title="Procedure and access site">
             <TextField label="Date of AF ablation" name="ablationDate" type="date" value={values.ablationDate} onChange={setValue} />
-            <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSiteOptions} onChange={setValue} />
+            <AccessSiteField value={values.accessSite} otherValue={String(values.otherAccessSite ?? "")} onChange={setValue} />
           </FormSection>
           <FormSection title="Immediate safety screen">
             <SelectField label="Any bleeding from access site?" name="bleeding" value={values.bleeding} options={["No", "Small spot on bandage", "Yes, stopped quickly", "Yes, ongoing", "Yes, soaking through bandage", "Yes, did not stop after 10-15 minutes of firm pressure"]} onChange={setValue} />
-            <SelectField label="Any groin/access-site swelling or lump?" name="accessSiteTrend" value={values.accessSiteTrend} options={["No", "Small and stable", "Worsening", "Rapidly expanding", "Fast-growing and painful"]} onChange={setValue} />
+            <SelectField label="Any access-site swelling or lump?" name="accessSiteTrend" value={values.accessSiteTrend} options={["No", "Small and stable", "Worsening", "Rapidly expanding", "Fast-growing and painful"]} onChange={setValue} />
             <SelectField label="Any limb symptoms on the access side?" name="limbSymptoms" value={String(values.limbSymptoms ?? "")} options={["No", "Cold limb", "Pale or blue color", "Numbness", "Tingling", "Weakness", "Severe pain", "Not sure"]} onChange={setValue} />
             <SelectField label="Any chest pain or chest pressure?" name="chestPain" value={values.chestPain} options={["No", "Mild", "Persistent", "Worsening", "Severe"]} onChange={setValue} />
             <SelectField label="Any shortness of breath?" name="shortnessOfBreath" value={values.shortnessOfBreath} options={["No", "Mild", "New or worsening", "Severe"]} onChange={setValue} />

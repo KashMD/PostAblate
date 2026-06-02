@@ -2,11 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { FormSection } from "@/components/FormSection";
-import { SelectField, TextArea, TextField } from "@/components/FormControls";
+import { AccessSiteField, SelectField, TextArea, TextField } from "@/components/FormControls";
 import { PageHeader } from "@/components/PageHeader";
 import { SafetyBanner } from "@/components/SafetyBanner";
 import { TriageResultCard } from "@/components/TriageResultCard";
-import { accessSiteOptions } from "@/lib/access-sites";
 import { evaluateTriage } from "@/lib/triage/rules";
 import type { SymptomCategory, TriageAnswer } from "@/lib/triage/types";
 
@@ -16,7 +15,7 @@ const symptomOptions: { label: string; value: SymptomCategory }[] = [
   ["Fainting or near-fainting", "fainting"],
   ["Stroke-like symptoms", "stroke-like-symptoms"],
   ["Bleeding from access site", "access-site-bleeding"],
-  ["Groin/access-site swelling or lump", "access-site-swelling"],
+  ["Access-site swelling or lump", "access-site-swelling"],
   ["Limb coldness, numbness, tingling, weakness, pain, or color change", "limb-symptoms"],
   ["Fever or chills", "fever-chills"],
   ["Palpitations or possible AF recurrence", "palpitations"],
@@ -60,7 +59,7 @@ export default function TriagePage() {
         >
           <FormSection title="Opening questions">
             <TextField label="When was your AF ablation?" name="ablationDate" type="date" value={values.ablationDate} onChange={setValue} />
-            <SelectField label="Where was the catheter insertion site?" name="accessSite" value={values.accessSite} options={accessSiteOptions} onChange={setValue} />
+            <AccessSiteField value={values.accessSite} otherValue={String(values.otherAccessSite ?? "")} onChange={setValue} />
             <SelectField label="What symptom or concern are you having now?" name="symptomCategory" value={values.symptomCategory} options={symptomOptions} onChange={setValue} />
             <TextArea label="Main concern, in your words" name="mainConcern" value={values.mainConcern} onChange={setValue} />
           </FormSection>

@@ -1,12 +1,22 @@
 import { describe, expect, it } from "vitest";
-import { accessSiteOptions } from "@/lib/access-sites";
+import { accessSiteOptions, formatAccessSites, parseAccessSites } from "@/lib/access-sites";
 import { buildFollowUpSummary, buildTriageSummary } from "@/lib/triage/summary";
 
 describe("accessSiteOptions", () => {
   it("limits PostAblate access-site choices to the AF ablation MVP options", () => {
-    expect(accessSiteOptions).toEqual(["Groin", "Neck", "More than one site", "Not sure"]);
+    expect(accessSiteOptions).toEqual(["Left groin", "Right groin", "Left neck", "Right neck", "Other", "Not sure"]);
+    expect(accessSiteOptions).not.toContain("Groin");
+    expect(accessSiteOptions).not.toContain("Neck");
+    expect(accessSiteOptions).not.toContain("More than one site");
     expect(accessSiteOptions).not.toContain("Wrist");
     expect(accessSiteOptions).not.toContain("Arm");
+  });
+
+  it("formats and parses multiple selected access sites without changing safety rules", () => {
+    const displayValue = formatAccessSites(["Left groin", "Right neck", "Other"]);
+
+    expect(displayValue).toBe("Left groin, Right neck, Other");
+    expect(parseAccessSites(displayValue)).toEqual(["Left groin", "Right neck", "Other"]);
   });
 
   it("uses the updated clinician summary labels", () => {

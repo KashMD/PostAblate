@@ -34,6 +34,7 @@ export type TriageCategory =
 export type TriageAnswer = {
   ablationDate?: string;
   accessSite?: string;
+  otherAccessSite?: string;
   symptomCategory?: SymptomCategory;
   mainConcern?: string;
   symptomOnset?: string;

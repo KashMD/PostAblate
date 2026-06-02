@@ -2,11 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { FormSection } from "@/components/FormSection";
-import { SelectField, TextArea, TextField } from "@/components/FormControls";
+import { AccessSiteField, SelectField, TextArea, TextField } from "@/components/FormControls";
 import { PageHeader } from "@/components/PageHeader";
 import { SafetyBanner } from "@/components/SafetyBanner";
 import { TriageResultCard } from "@/components/TriageResultCard";
-import { accessSiteOptions } from "@/lib/access-sites";
 import { evaluateTriage } from "@/lib/triage/rules";
 import { buildFollowUpSummary } from "@/lib/triage/summary";
 import type { TriageAnswer, TriageResult } from "@/lib/triage/types";
@@ -37,7 +36,7 @@ export default function ThirtyDayPage() {
         <form className="grid gap-5" onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }}>
           <FormSection title="Procedure details">
             <TextField label="Date of AF ablation" name="ablationDate" type="date" value={values.ablationDate} onChange={setValue} />
-            <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSiteOptions} onChange={setValue} />
+            <AccessSiteField value={values.accessSite} otherValue={String(values.otherAccessSite ?? "")} onChange={setValue} />
           </FormSection>
           <FormSection title="Healthcare use since ablation">
             <SelectField label="Since your ablation, have you gone to the emergency room?" name="erVisit" value={String(values.erVisit ?? "")} options={["Yes", "No"]} onChange={setValue} />

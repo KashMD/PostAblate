@@ -143,7 +143,7 @@ describe("evaluateTriage", () => {
   it("escalates Next-Day Safety Check red flags through the shared triage engine", () => {
     const result = expectCategory(
       {
-        accessSite: "Groin",
+        accessSite: "Left groin",
         bleeding: "Yes, did not stop after 10-15 minutes of firm pressure",
         overallConcern: "No, I feel unsafe at home"
       },
@@ -156,7 +156,7 @@ describe("evaluateTriage", () => {
   it("escalates 1-Week Recovery Check red flags through the shared triage engine", () => {
     expectCategory(
       {
-        accessSite: "Neck",
+        accessSite: "Right neck",
         palpitations: "Lasting longer than 24 hours",
         accessSiteSymptomTrend: "Worsening"
       },
@@ -167,7 +167,7 @@ describe("evaluateTriage", () => {
   it("escalates 30-Day Recovery Follow-Up red flags through the shared triage engine", () => {
     expectCategory(
       {
-        accessSite: "More than one site",
+        accessSite: "Left groin, Right neck",
         swallowing: "Trouble swallowing",
         chestPain: "Mild"
       },
