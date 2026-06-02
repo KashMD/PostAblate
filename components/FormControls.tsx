@@ -6,7 +6,7 @@ type FieldProps = {
   label: string;
   name: string;
   value?: string;
-  options?: Array<string | { label: string; value: string }>;
+  options?: ReadonlyArray<string | { label: string; value: string }>;
   type?: string;
   onChange: (name: string, value: string) => void;
 };

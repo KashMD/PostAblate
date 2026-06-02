@@ -6,11 +6,10 @@ import { SelectField, TextArea, TextField } from "@/components/FormControls";
 import { PageHeader } from "@/components/PageHeader";
 import { SafetyBanner } from "@/components/SafetyBanner";
 import { TriageResultCard } from "@/components/TriageResultCard";
+import { accessSiteOptions } from "@/lib/access-sites";
 import { evaluateTriage } from "@/lib/triage/rules";
 import { buildFollowUpSummary } from "@/lib/triage/summary";
 import type { TriageAnswer, TriageResult } from "@/lib/triage/types";
-
-const accessSites = ["Groin", "Wrist", "Arm", "Neck", "More than one site", "Not sure"];
 
 export default function OneWeekPage() {
   const [values, setValues] = useState<TriageAnswer>({});
@@ -33,7 +32,7 @@ export default function OneWeekPage() {
           <FormSection title="Procedure and access site">
             <TextField label="Date of AF ablation" name="ablationDate" type="date" value={values.ablationDate} onChange={setValue} />
             <TextField label="Today's date" name="todayDate" type="date" value={String(values.todayDate ?? "")} onChange={setValue} />
-            <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSites} onChange={setValue} />
+            <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSiteOptions} onChange={setValue} />
             <SelectField label="Is the catheter site healing?" name="siteHealing" value={String(values.siteHealing ?? "")} options={["Yes", "Mostly", "No", "Not sure"]} onChange={setValue} />
           </FormSection>
           <FormSection title="Access-site safety">

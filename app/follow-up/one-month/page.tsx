@@ -6,11 +6,11 @@ import { SelectField, TextArea, TextField } from "@/components/FormControls";
 import { PageHeader } from "@/components/PageHeader";
 import { SafetyBanner } from "@/components/SafetyBanner";
 import { TriageResultCard } from "@/components/TriageResultCard";
+import { accessSiteOptions } from "@/lib/access-sites";
 import { evaluateTriage } from "@/lib/triage/rules";
 import { buildFollowUpSummary } from "@/lib/triage/summary";
 import type { TriageAnswer, TriageResult } from "@/lib/triage/types";
 
-const accessSites = ["Groin", "Wrist", "Arm", "Neck", "More than one site", "Not sure"];
 const bloodThinners = ["Warfarin/Coumadin", "Apixaban/Eliquis", "Rivaroxaban/Xarelto", "Dabigatran/Pradaxa", "Edoxaban/Savaysa", "Aspirin", "Clopidogrel/Plavix", "Ticagrelor/Brilinta", "Prasugrel/Effient", "Other", "Not sure"];
 
 export default function OneMonthPage() {
@@ -37,7 +37,7 @@ export default function OneMonthPage() {
         <form className="grid gap-5" onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }}>
           <FormSection title="Procedure details">
             <TextField label="Date of AF ablation" name="ablationDate" type="date" value={values.ablationDate} onChange={setValue} />
-            <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSites} onChange={setValue} />
+            <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSiteOptions} onChange={setValue} />
           </FormSection>
           <FormSection title="Healthcare use since ablation">
             <SelectField label="Since your ablation, have you gone to the emergency room?" name="erVisit" value={String(values.erVisit ?? "")} options={["Yes", "No"]} onChange={setValue} />

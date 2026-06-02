@@ -7,8 +7,8 @@ import { FormSection } from "@/components/FormSection";
 import { SelectField, TextField } from "@/components/FormControls";
 import { PageHeader } from "@/components/PageHeader";
 import { SafetyBanner } from "@/components/SafetyBanner";
+import { accessSiteOptions } from "@/lib/access-sites";
 
-const accessSites = ["Groin", "Wrist", "Arm", "Neck", "More than one site", "Not sure"];
 const yesNoSure = ["Yes", "No", "Not sure"];
 const bloodThinners = ["Warfarin/Coumadin", "Apixaban/Eliquis", "Rivaroxaban/Xarelto", "Dabigatran/Pradaxa", "Edoxaban/Savaysa", "Aspirin", "Clopidogrel/Plavix", "Ticagrelor/Brilinta", "Prasugrel/Effient", "Other", "Not sure"];
 
@@ -33,7 +33,7 @@ export default function IntakePage() {
         <FormSection title="Procedure details" description="AF ablation is fixed for this MVP. Other EP procedure pathways are not active.">
           <TextField label="Procedure type" name="procedureType" value={values.procedureType} onChange={setValue} />
           <TextField label="Date of AF ablation" name="procedureDate" type="date" value={values.procedureDate} onChange={setValue} />
-          <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSites} onChange={setValue} />
+          <SelectField label="Access site" name="accessSite" value={values.accessSite} options={accessSiteOptions} onChange={setValue} />
           <SelectField label="Discharge type" name="dischargeType" value={values.dischargeType} options={["Same day", "Overnight", "Longer hospitalization", "Not sure"]} onChange={setValue} />
         </FormSection>
         <div className="mt-5">

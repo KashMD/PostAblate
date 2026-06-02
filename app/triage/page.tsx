@@ -6,6 +6,7 @@ import { SelectField, TextArea, TextField } from "@/components/FormControls";
 import { PageHeader } from "@/components/PageHeader";
 import { SafetyBanner } from "@/components/SafetyBanner";
 import { TriageResultCard } from "@/components/TriageResultCard";
+import { accessSiteOptions } from "@/lib/access-sites";
 import { evaluateTriage } from "@/lib/triage/rules";
 import type { SymptomCategory, TriageAnswer } from "@/lib/triage/types";
 
@@ -37,8 +38,6 @@ const symptomOptions: { label: string; value: SymptomCategory }[] = [
   ["Other or not sure", "other"]
 ].map(([label, value]) => ({ label, value: value as SymptomCategory }));
 
-const accessSites = ["Groin", "Wrist", "Arm", "Neck", "More than one site", "Not sure"];
-
 export default function TriagePage() {
   const [values, setValues] = useState<TriageAnswer>({});
   const [submitted, setSubmitted] = useState(false);
@@ -61,7 +60,7 @@ export default function TriagePage() {
         >
           <FormSection title="Opening questions">
             <TextField label="When was your AF ablation?" name="ablationDate" type="date" value={values.ablationDate} onChange={setValue} />
-            <SelectField label="Where was the catheter insertion site?" name="accessSite" value={values.accessSite} options={accessSites} onChange={setValue} />
+            <SelectField label="Where was the catheter insertion site?" name="accessSite" value={values.accessSite} options={accessSiteOptions} onChange={setValue} />
             <SelectField label="What symptom or concern are you having now?" name="symptomCategory" value={values.symptomCategory} options={symptomOptions} onChange={setValue} />
             <TextArea label="Main concern, in your words" name="mainConcern" value={values.mainConcern} onChange={setValue} />
           </FormSection>
