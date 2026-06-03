@@ -29,10 +29,13 @@ export default function Home() {
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700">A structured recovery companion for patients after atrial fibrillation ablation.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/triage" className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-slate-800">
-              I have a symptom now
+              I have a symptom now - available anytime
             </Link>
             <Link href="/follow-up/next-day" className="rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal shadow-sm transition hover:bg-teal hover:text-white">
               Complete Next-Day Safety Check
+            </Link>
+            <Link href="/follow-up/one-week" className="rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal shadow-sm transition hover:bg-teal hover:text-white">
+              Complete 1-Week Recovery Check
             </Link>
             <Link href="/follow-up/thirty-day" className="rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal shadow-sm transition hover:bg-teal hover:text-white">
               Complete 30-Day Follow-Up
