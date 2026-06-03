@@ -9,10 +9,13 @@ const config: Config = {
         teal: "#0e9488",
         sky: "#dff3f8",
         coral: "#d95f5f",
+        cream: "#fbfaf7",
+        mist: "#eef6f7",
         clinical: "#f5f8fb"
       },
       boxShadow: {
-        soft: "0 18px 45px rgba(15, 39, 66, 0.08)"
+        soft: "0 18px 45px rgba(15, 39, 66, 0.08)",
+        card: "0 14px 36px rgba(15, 39, 66, 0.07)"
       }
     }
   },

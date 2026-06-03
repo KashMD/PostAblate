@@ -80,9 +80,9 @@ export default function ThirtyDayPage() {
             <SelectField label="Heart rhythm worry from 0 to 10" name="rhythmWorryScore" value={String(values.rhythmWorryScore ?? "")} options={["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]} onChange={setValue} />
             <TextArea label="Biggest concern or question for your EP team" name="questionsForTeam" value={values.questionsForTeam} onChange={setValue} />
           </FormSection>
-          <button className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm" type="submit">Submit 30-Day Recovery Follow-Up</button>
+          <button className="min-h-12 rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-navy/20" type="submit">Submit 30-Day Recovery Follow-Up</button>
         </form>
-        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-soft">Your 30-day safety category and clinician summary will appear here after submission.</div>}</aside>
+        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200/80 bg-white/95 p-5 text-sm leading-6 text-slate-600 shadow-card">Your 30-day safety category and clinician summary will appear here after submission.</div>}</aside>
       </div>
     </div>
   );

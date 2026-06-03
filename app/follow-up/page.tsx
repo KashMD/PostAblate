@@ -12,9 +12,9 @@ export default function FollowUpPage() {
         description="PostAblate supports a structured pathway: next-day safety screening, 1-week recovery review, and 30-day recovery follow-up. Symptom triage is available anytime."
       />
       <SafetyBanner />
-      <Link href="/triage" className="mt-6 block rounded-lg border border-coral/25 bg-red-50 p-5 shadow-soft">
+      <Link href="/triage" className="mt-6 block rounded-lg border border-coral/25 bg-red-50/90 p-5 shadow-card transition hover:-translate-y-0.5 hover:shadow-soft focus:outline-none focus:ring-4 focus:ring-coral/15">
         <p className="text-sm font-semibold uppercase tracking-wide text-coral">Have symptoms now?</p>
-        <h2 className="mt-1 text-xl font-semibold text-navy">Use Anytime Symptom Triage</h2>
+        <h2 className="mt-1 text-xl font-semibold tracking-tight text-navy">Use Anytime Symptom Triage</h2>
         <p className="mt-2 text-sm leading-6 text-slate-600">Red-flag symptoms should not wait for a scheduled check-in.</p>
       </Link>
       <div className="mt-6 grid gap-4 md:grid-cols-3">

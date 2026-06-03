@@ -79,11 +79,11 @@ export default function TriagePage() {
             <SelectField label="Medication or blood thinner concern" name="missedBloodThinner" value={values.missedBloodThinner} options={["No", "Missed dose", "Stopped on my own", "Not sure", "Question without missed doses"]} onChange={setValue} />
             <TextArea label="Questions for EP team" name="questionsForTeam" value={values.questionsForTeam} onChange={setValue} />
           </FormSection>
-          <button className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm" type="submit">
+          <button className="min-h-12 rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-navy/20" type="submit">
             Show triage result
           </button>
         </form>
-        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-soft">Your protocol-driven result will appear here after you submit the structured triage form.</div>}</aside>
+        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200/80 bg-white/95 p-5 text-sm leading-6 text-slate-600 shadow-card">Your protocol-driven result will appear here after you submit the structured triage form.</div>}</aside>
       </div>
     </div>
   );

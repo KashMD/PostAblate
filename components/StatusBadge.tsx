@@ -9,5 +9,5 @@ const styles: Record<TriageCategory, string> = {
 };
 
 export function StatusBadge({ category, label }: { category: TriageCategory; label?: string }) {
-  return <span className={cn("inline-flex rounded-full border px-3 py-1 text-xs font-semibold", styles[category])}>{label ?? category}</span>;
+  return <span className={cn("inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold shadow-sm", styles[category])}>{label ?? category}</span>;
 }

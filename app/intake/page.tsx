@@ -21,7 +21,7 @@ export default function IntakePage() {
       <PageHeader eyebrow="Intake" title="AF ablation recovery intake" description="This intake captures structured procedure details for the PostAblate AF ablation recovery pathway." />
       <div className="mb-6 grid gap-3">
         <SafetyBanner />
-        <p className="rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-600">This intake does not replace your discharge instructions or EP team&apos;s advice.</p>
+        <p className="rounded-lg border border-slate-200/80 bg-white/95 p-4 text-sm leading-6 text-slate-600 shadow-sm">This intake does not replace your discharge instructions or EP team&apos;s advice.</p>
       </div>
       <form
         onSubmit={(event) => {
@@ -43,9 +43,9 @@ export default function IntakePage() {
             <SelectField label="Known complications" name="knownComplications" value={values.knownComplications} options={["None", "Bleeding", "Pericardial effusion", "Stroke/TIA", "Vascular complication", "Other", "Not sure"]} onChange={setValue} />
           </FormSection>
         </div>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <button type="submit" className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm">Continue to symptom triage</button>
-          <Link href="/follow-up" className="rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal">Go to recovery overview</Link>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <button type="submit" className="min-h-12 rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-navy/20">Continue to symptom triage</button>
+          <Link href="/follow-up" className="inline-flex min-h-12 items-center justify-center rounded-lg border border-teal/30 bg-white px-5 py-3 text-sm font-semibold text-teal shadow-sm transition hover:bg-teal hover:text-white focus:outline-none focus:ring-4 focus:ring-teal/15">Go to recovery overview</Link>
         </div>
       </form>
     </div>

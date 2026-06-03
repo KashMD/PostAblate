@@ -60,17 +60,17 @@ function AccessSiteSymptomsField({
   };
 
   return (
-    <fieldset className="grid gap-3 rounded-lg border border-slate-200 bg-white p-4">
+    <fieldset className="grid gap-3 rounded-lg border border-slate-200 bg-clinical/70 p-4">
       <legend className="px-1 text-sm font-semibold text-navy">Access-site symptoms</legend>
       <div className="grid gap-2 sm:grid-cols-2">
         {accessSiteSymptomOptions.map((option) => (
-          <label key={option} className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-navy">
+          <label key={option} className="flex min-h-12 min-w-0 items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-navy transition hover:border-teal/40 hover:bg-sky/30">
             <input
               name="accessSiteFindings"
               type="checkbox"
               checked={selected.includes(option)}
               onChange={() => toggle(option)}
-              className="h-4 w-4 rounded border-slate-300 text-teal focus:ring-teal"
+              className="h-5 w-5 rounded border-slate-300 text-teal focus:ring-teal"
             />
             {option}
           </label>
@@ -132,9 +132,9 @@ export default function OneWeekPage() {
             <SelectField label="Overall recovery" name="overallConcern" value={values.overallConcern} options={["Better than expected", "As expected", "Worse than expected", "Not sure"]} onChange={setValue} />
             <TextArea label="Optional message to care team" name="questionsForTeam" value={values.questionsForTeam} onChange={setValue} />
           </FormSection>
-          <button className="rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm" type="submit">Submit 1-Week Recovery Check</button>
+          <button className="min-h-12 rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-navy/20" type="submit">Submit 1-Week Recovery Check</button>
         </form>
-        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-soft">Your 1-week recovery category and clinician summary will appear here after submission.</div>}</aside>
+        <aside className="lg:sticky lg:top-28 lg:self-start">{submitted ? <TriageResultCard result={result} /> : <div className="rounded-lg border border-slate-200/80 bg-white/95 p-5 text-sm leading-6 text-slate-600 shadow-card">Your 1-week recovery category and clinician summary will appear here after submission.</div>}</aside>
       </div>
     </div>
   );

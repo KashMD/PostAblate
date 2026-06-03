@@ -12,10 +12,19 @@
 
 body {
   margin: 0;
-  background: #f5f8fb;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(223, 243, 248, 0.72), transparent 30rem),
+    linear-gradient(180deg, #fbfaf7 0%, #f5f8fb 38%, #eef6f7 100%);
   color: #0f2742;
 }
 
 a {
   text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
