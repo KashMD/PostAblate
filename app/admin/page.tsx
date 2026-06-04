@@ -3,19 +3,27 @@ import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import { mockSubmissions } from "@/lib/mock/admin";
 
-const filters = ["Emergency now", "Same-day EP flags", "Routine nurse review", "Education-only encounters", "Next-day safety checks", "1-week recovery checks", "30-day recovery follow-ups", "Access-site concerns", "Rhythm symptoms", "Medication concerns"];
+const reviewFilters = ["All", "Emergency", "Urgent", "Routine", "Education", "Next-Day", "1-Week", "30-Day"];
+
+const categoryLabels = {
+  emergency: "Emergency",
+  urgent: "Urgent",
+  routine: "Routine",
+  education: "Education"
+} as const;
+
+const statusStyles = {
+  New: "border-teal/20 bg-sky text-navy",
+  Reviewed: "border-slate-200 bg-clinical text-slate-700",
+  Closed: "border-emerald-200 bg-emerald-50 text-emerald-900"
+} as const;
 
 export default function AdminPage() {
   const metrics = [
-    ["Total patients", 42],
-    ["New triage submissions", 8],
     ["Emergency flags", mockSubmissions.filter((item) => item.category === "emergency").length],
-    ["Same-day EP flags", mockSubmissions.filter((item) => item.category === "urgent").length],
-    ["Next-day safety checks", mockSubmissions.filter((item) => item.type === "Next-Day Safety Check").length],
-    ["1-week recovery checks", mockSubmissions.filter((item) => item.type === "1-Week Recovery Check").length],
-    ["30-day recovery follow-ups", mockSubmissions.filter((item) => item.type === "30-Day Recovery Follow-Up").length],
-    ["Routine nurse review", mockSubmissions.filter((item) => item.category === "routine").length],
-    ["Education-only encounters", mockSubmissions.filter((item) => item.category === "education").length]
+    ["Same-day EP", mockSubmissions.filter((item) => item.category === "urgent").length],
+    ["Routine review", mockSubmissions.filter((item) => item.category === "routine").length],
+    ["Education only", mockSubmissions.filter((item) => item.category === "education").length]
   ];
 
   return (
@@ -30,7 +38,7 @@ export default function AdminPage() {
       <section className="mt-6 rounded-lg border border-slate-200/80 bg-white/95 p-5 shadow-card">
         <h2 className="text-lg font-semibold tracking-tight text-navy">Filters</h2>
         <div className="mt-4 flex flex-wrap gap-2">
-          {filters.map((filter) => <span key={filter} className="rounded-full border border-slate-200 bg-clinical px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm">{filter}</span>)}
+          {reviewFilters.map((filter) => <span key={filter} className="rounded-full border border-slate-200 bg-clinical px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm">{filter}</span>)}
         </div>
       </section>
       <section className="mt-6 overflow-hidden rounded-lg border border-slate-200/80 bg-white/95 shadow-card">
@@ -48,10 +56,10 @@ export default function AdminPage() {
                   <td className="px-5 py-5 text-slate-600">{submission.ablationDate}</td>
                   <td className="px-5 py-5 text-slate-600">{submission.accessSite}</td>
                   <td className="px-5 py-5 text-slate-600">{submission.type}</td>
-                  <td className="px-5 py-5"><StatusBadge category={submission.category} /></td>
+                  <td className="px-5 py-5"><StatusBadge category={submission.category} label={categoryLabels[submission.category]} /></td>
                   <td className="max-w-xs px-5 py-5 leading-6 text-slate-600">{submission.concern}</td>
                   <td className="px-5 py-5 text-slate-600">{submission.submittedDate}</td>
-                  <td className="px-5 py-5"><span className="rounded-full bg-clinical px-3 py-1.5 text-xs font-semibold text-slate-600">{submission.status}</span></td>
+                  <td className="px-5 py-5"><span className={`rounded-full border px-3 py-1.5 text-xs font-semibold shadow-sm ${statusStyles[submission.status]}`}>{submission.status}</span></td>
                 </tr>
               ))}
             </tbody>

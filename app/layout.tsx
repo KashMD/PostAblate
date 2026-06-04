@@ -28,6 +28,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
         <main>{children}</main>
+        <footer className="border-t border-slate-200/80 bg-white/80">
+          <div className="mx-auto grid max-w-7xl gap-5 px-4 py-8 sm:px-6 md:grid-cols-[1fr_auto] md:items-center lg:px-8">
+            <div className="flex items-start gap-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[linear-gradient(135deg,#0f2742,#0e9488)] text-sm font-bold text-white shadow-sm">PA</span>
+              <div>
+                <p className="font-semibold tracking-tight text-navy">PostAblate</p>
+                <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-600">
+                  This is an MVP demonstration product and is not intended for real patient care, diagnosis, or treatment. In an emergency, call 911 immediately.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 text-sm font-semibold">
+              <Link href="/about" className="rounded-lg px-3 py-2 text-slate-600 transition hover:bg-clinical hover:text-navy">About & Safety</Link>
+              <Link href="/intake" className="rounded-lg px-3 py-2 text-slate-600 transition hover:bg-clinical hover:text-navy">Patient Intake</Link>
+              <Link href="/triage" className="rounded-lg px-3 py-2 text-slate-600 transition hover:bg-clinical hover:text-navy">Symptom Triage</Link>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

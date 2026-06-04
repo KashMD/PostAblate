@@ -37,6 +37,8 @@ const symptomOptions: { label: string; value: SymptomCategory }[] = [
   ["Other or not sure", "other"]
 ].map(([label, value]) => ({ label, value: value as SymptomCategory }));
 
+const triageSteps = ["Context", "Symptoms", "Result"];
+
 export default function TriagePage() {
   const [values, setValues] = useState<TriageAnswer>({});
   const [submitted, setSubmitted] = useState(false);
@@ -48,6 +50,14 @@ export default function TriagePage() {
       <PageHeader eyebrow="Anytime Symptom Triage" title="Structured AF ablation symptom triage" description="Available anytime after AF ablation. Answer fixed safety questions. Red flags always override routine recovery education." />
       <div className="mb-6">
         <SafetyBanner />
+      </div>
+      <div className="mb-6 grid gap-3 rounded-lg border border-slate-200/80 bg-white/90 p-3 shadow-card sm:grid-cols-3">
+        {triageSteps.map((step, index) => (
+          <div key={step} className="flex items-center gap-3 rounded-lg bg-clinical px-3 py-3">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-sky text-sm font-semibold text-navy ring-1 ring-teal/15">{index + 1}</span>
+            <span className="text-sm font-semibold text-navy">{step}</span>
+          </div>
+        ))}
       </div>
       <div className="grid gap-5 lg:grid-cols-[1fr_0.9fr]">
         <form
